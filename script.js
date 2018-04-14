@@ -31,9 +31,20 @@ var gameScreen;
 var messageDisplay, livesDisplay;
 var resetButton, musicButton;
 
-/*
- * function loadImages()
- * Called in the preload() function. Loads all images needed for your game
+
+  function loadImages(){
+    var backImage= loadImage("assets/img/back.png");
+    var boltImage= loadImage("assets/img/bolt.png");
+    var cloudImage= loadImage("assets/img/cloud.png");
+    var sunImage= loadImage("assets/img/sun.png");
+    var moonImage= loadImage("assets/img/moon.png");
+    var smileyImage= loadImage("assets/img/smiley.png");
+    var heartImage= loadImage("assets/img/heart.png");
+    var transitionImage1= loadImage("assets/img/transition1.png");
+    var transitionImage2= loadImage("assets/img/transition2.png");
+    var transitionImage3= loadImage("assets/img/transition3.png");
+  }
+ /* Called in the preload() function. Loads all images needed for your game
  * with the loadImage() function. When testing on your machine, be sure to
  * setup a local test server or the images will not load! Your coach will show
  * you how to do this.
@@ -44,9 +55,15 @@ var resetButton, musicButton;
  */
 
 
-/*
- * function loadAnimations()
- * Called in the preload() function. Loads all animations using the built-in
+  function loadAnimations(){
+    var boltAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, boltImage);
+    var cloudAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, cloudImage);
+    var sunAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, sunImage);
+    var moonAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, moonImage);
+    var smileyAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, smileyImage);
+    var heartAnimation= loadAnimation(backImage, transitionImage1, transitionImage2, transitionImage3, heartImage);
+  }
+ /* Called in the preload() function. Loads all animations using the built-in
  * p5.play function "loadAnimation()". Therefore, this function is called after
  * loadImages(). The loadAnimation() function takes image input in the order
  * you'd like the animation to be played, from the first frame to the last.
@@ -69,18 +86,32 @@ var resetButton, musicButton;
  */
 
 
-/*
- * function preload()
- * Called automatically by p5.play. Loads all assets for your game (e.g.,
+
+  function preload(){
+    loadAnimations();
+    loadImages();
+  }
+ /* Called automatically by p5.play. Loads all assets for your game (e.g.,
  * images, sounds) before p5 calls setup(), to ensure that the game does not
  * begin running until the assets are loaded and ready. Therefore, this function
  * is essentially a "pre-setup" function. 
  */
 
 
-/*
- * function setup()
- * Called automatically by p5.js when the game begins, but after preload().
+
+ function setup(){
+  gameScreen(790,370);
+  gameScreen.parent("#game-screen");
+  spriteWidth= 120;
+  spriteHeight= 168;
+  spriteX= 70;
+  spriteY= 95;
+  [] imageArray= [6];
+  resizeImages();
+  createSprites();
+  [] spriteArray= [boltSprite1, boltSprite2, cloudSprite1,cloudSprite2, sunSprite1, sunSprite2, moonSprite1, moonSprite2, smileySprite1, smileySprite2, heartSprite1, heartSprite2];
+ }
+ /* Called automatically by p5.js when the game begins, but after preload().
  * Therefore, assets are assumed to have been loaded and ready before this
  * function is called.
  */
@@ -112,9 +143,13 @@ var resetButton, musicButton;
  */
 
 
-/*
- * function resizeImages()
- * Resizes all images in imageArray such that each image has a width of
+
+  function resizeImages(){
+    for(i=0; i<imageArray.length;i++){
+      image.resize(spriteWidth, spriteHeight);
+    }
+  }
+ /* Resizes all images in imageArray such that each image has a width of
  * spriteWidth and a height of spriteHeight. To resize an image use the
  * resize(width, height) method on the image itself.
  * Example of resizing one image:
@@ -122,9 +157,20 @@ var resetButton, musicButton;
  */
 
 
-/*
- * function createSprites()
- * Initializes each sprite variable (e.g., sunSprite1) as a sprite object
+
+  function createSprites(){
+   var boltSprite1= createSprite(0,0,spriteWidth,spriteHeight);
+   var boltSprite2= createSprite(0,0,spriteWidth,spriteHeight);
+   var cloudSprite1= createSprite(0,0,spriteWidth,spriteHeight);
+   var cloudSprite2= createSprite(0,0,spriteWidth,spriteHeight);
+   var sunSprite1= createSprite(0,0,spriteWidth,spriteHeight);
+   var sunSprite2= createSprite(0,0,spriteWidth,spriteHeight);
+   var moonSprite1= createSprite(0,0,spriteWidth,spriteHeight);
+   var moonSprite2= createSprite(0,0,spriteWidth,spriteHeight);
+   var smileySprite1= createSprite(0,0,spriteWidth,spriteHeight);
+   var smileySprite2= createSprite(0,0,spriteWidth,spriteHeight);
+  }
+ /* Initializes each sprite variable (e.g., sunSprite1) as a sprite object
  * through the createSprite(x, y, width, height) p5.play method. For all sprites,
  * x and y parameters should be passed values 0 and 0 (sprites are actually placed
  * in a separate function), while width and height correspond to spriteWidth and
